@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>30 Days Back to Yourself — The Return</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --ink: #0e0d0b;
+    --cream: #f2edd6;
+    --cream-dim: #e8e1c4;
+    --gold: #c9a84c;
+    --gold-light: #e2c97e;
+    --gold-dim: #8a6c2c;
+    --warm-dark: #1a1712;
+    --text-muted: #8a7e68;
+    --error: #c0392b;
+    --success: #2e7d4f;
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--ink);
+    color: var(--cream);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 2.5rem;
+    border-bottom: 0.5px solid rgba(201,168,76,0.2);
+  }
+  .nav-brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .nav-tag {
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+  .hero {
+    text-align: center;
+    padding: 5rem 2rem 4rem;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  .eyebrow {
+    font-size: 0.68rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+  }
+  .eyebrow::before, .eyebrow::after {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 0.5px;
+    background: var(--gold-dim);
+  }
+  .product-frame {
+    margin: 0 auto 2.5rem;
+    width: 180px;
+    height: 240px;
+    background: var(--warm-dark);
+    border: 0.5px solid rgba(201,168,76,0.35);
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    box-shadow: 8px 12px 48px rgba(0,0,0,0.7);
+  }
+  .product-frame::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 4px;
+    background: linear-gradient(135deg, rgba(201,168,76,0.07) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .product-frame-inner {
+    text-align: center;
+    padding: 1rem;
+    position: relative;
+    z-index: 1;
+  }
+  .product-frame-rule {
+    width: 32px;
+    height: 0.5px;
+    background: var(--gold-dim);
+    margin: 0.75rem auto;
+  }
+  .product-frame-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.85rem;
+    line-height: 1.4;
+    color: var(--cream);
+  }
+  .product-frame-sub {
+    font-size: 0.55rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-top: 0.5rem;
+  }
+  .product-frame-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.4rem;
+    color: var(--gold);
+    line-height: 1;
+  }
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2rem, 6vw, 3.6rem);
+    font-weight: 400;
+    line-height: 1.15;
+    color: var(--cream);
+    margin-bottom: 1rem;
+  }
+  .hero-title em { font-style: italic; color: var(--gold-light); }
+  .hero-sub {
+    font-size: 1rem;
+    color: var(--text-muted);
+    max-width: 480px;
+    margin: 0 auto 2.5rem;
+    line-height: 1.8;
+  }
+  .free-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(201,168,76,0.1);
+    border: 0.5px solid rgba(201,168,76,0.4);
+    border-radius: 100px;
+    padding: 0.4rem 1.1rem;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 1.75rem;
+  }
+  .free-badge-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--gold);
+    animation: pulse 2s infinite;
+    flex-shrink: 0;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.25; }
+  }
+  .cta-btn {
+    display: inline-block;
+    background: var(--gold);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 1rem 2.8rem;
+    border-radius: 2px;
+    cursor: pointer;
+    border: none;
+    transition: background 0.2s, transform 0.15s;
+    width: 100%;
+    max-width: 340px;
+  }
+  .cta-btn:hover { background: var(--gold-light); transform: translateY(-1px); }
+  .cta-btn:active { transform: scale(0.98); }
+  .cta-note {
+    font-size: 0.68rem;
+    color: var(--text-muted);
+    margin-top: 0.85rem;
+    letter-spacing: 0.05em;
+  }
+
+  /* ── CODE GATE (hidden by default, shown when MODE = paid) ── */
+  #code-gate {
+    display: none;
+    max-width: 340px;
+    margin: 0 auto 0.5rem;
+    text-align: left;
+  }
+  #code-gate label {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+  .code-row {
+    display: flex;
+    gap: 0;
+    border: 0.5px solid rgba(201,168,76,0.35);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  #code-input {
+    flex: 1;
+    background: var(--warm-dark);
+    border: none;
+    outline: none;
+    color: var(--cream);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.75rem 1rem;
+  }
+  #code-input::placeholder { color: var(--text-muted); text-transform: none; letter-spacing: 0; }
+  #code-submit {
+    background: rgba(201,168,76,0.15);
+    border: none;
+    border-left: 0.5px solid rgba(201,168,76,0.25);
+    color: var(--gold);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0 1.1rem;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  #code-submit:hover { background: rgba(201,168,76,0.25); }
+  #code-msg {
+    font-size: 0.72rem;
+    margin-top: 0.5rem;
+    min-height: 1.1rem;
+    letter-spacing: 0.05em;
+  }
+  #code-msg.error { color: #e07060; }
+  #code-msg.success { color: #7ec99a; }
+
+  /* ── FREE CTA (visible by default) ── */
+  #free-cta { text-align: center; }
+
+  /* ── PAID CTA (hidden by default, revealed after correct code) ── */
+  #paid-cta { display: none; text-align: center; }
+  #paid-cta .cta-btn { background: var(--gold); }
+
+  .section-divider {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+  .section-divider::before, .section-divider::after {
+    content: '';
+    flex: 1;
+    height: 0.5px;
+    background: rgba(201,168,76,0.15);
+  }
+  .section-divider span {
+    font-size: 0.58rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    white-space: nowrap;
+  }
+  .section {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+  }
+  .section-label {
+    font-size: 0.62rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.25rem;
+    text-align: center;
+  }
+  .section-heading {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.5rem, 4vw, 2.1rem);
+    font-weight: 400;
+    text-align: center;
+    margin-bottom: 0.75rem;
+    color: var(--cream);
+    line-height: 1.25;
+  }
+  .section-heading em { font-style: italic; color: var(--gold-light); }
+  .section-desc {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.88rem;
+    margin-bottom: 2.5rem;
+    max-width: 460px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.75;
+  }
+  .feature-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: rgba(201,168,76,0.1);
+    border: 0.5px solid rgba(201,168,76,0.12);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 2.5rem;
+  }
+  .feature-cell {
+    background: var(--warm-dark);
+    padding: 1.4rem 1.5rem;
+  }
+  .feature-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    color: rgba(201,168,76,0.25);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+  .feature-title {
+    font-size: 0.83rem;
+    font-weight: 500;
+    color: var(--cream);
+    margin-bottom: 0.35rem;
+  }
+  .feature-text {
+    font-size: 0.76rem;
+    color: var(--text-muted);
+    line-height: 1.65;
+  }
+  .quote-block {
+    border-left: 1.5px solid var(--gold-dim);
+    padding: 1.25rem 1.8rem;
+    margin: 2rem 0 0;
+    background: rgba(201,168,76,0.03);
+    border-radius: 0 4px 4px 0;
+  }
+  .quote-block p {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 0.97rem;
+    color: var(--cream-dim);
+    line-height: 1.8;
+  }
+  .for-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+  }
+  .for-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.85rem;
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    line-height: 1.65;
+  }
+  .for-list li::before {
+    content: '—';
+    color: var(--gold-dim);
+    flex-shrink: 0;
+  }
+  .download-section {
+    background: var(--warm-dark);
+    border-top: 0.5px solid rgba(201,168,76,0.15);
+    border-bottom: 0.5px solid rgba(201,168,76,0.15);
+    padding: 5rem 2rem;
+    text-align: center;
+  }
+  .download-inner { max-width: 480px; margin: 0 auto; }
+  footer {
+    text-align: center;
+    padding: 2rem;
+    font-size: 0.68rem;
+    color: var(--text-muted);
+    letter-spacing: 0.1em;
+    border-top: 0.5px solid rgba(201,168,76,0.08);
+  }
+  @media (max-width: 540px) {
+    .feature-grid { grid-template-columns: 1fr; }
+    nav { padding: 1.25rem 1.5rem; }
+    .hero { padding: 3.5rem 1.5rem 3rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── SITE MODE: set to "free" or "paid" ── -->
+<!-- To switch to paid mode, change the value below to "paid" -->
+<script>
+  var SITE_MODE = "free";
+  var REDEEM_CODE = "AWAKEN";
+  var DOWNLOAD_URL = "https://gloctastic3.gumroad.com/l/thereturn";
+</script>
+
+<nav>
+  <span class="nav-brand">The Return</span>
+  <span class="nav-tag" id="nav-tag">Free · Limited Time</span>
+</nav>
+
+<section class="hero">
+  <div class="eyebrow">A 30-Day Guided Journal</div>
+
+  <div class="product-frame">
+    <div class="product-frame-inner">
+      <div class="product-frame-num">30</div>
+      <div class="product-frame-rule"></div>
+      <div class="product-frame-title">Days Back<br>to Yourself</div>
+      <div class="product-frame-rule"></div>
+      <div class="product-frame-sub">The Return</div>
+    </div>
+  </div>
+
+  <h1 class="hero-title">You didn't lose yourself.<br>You just <em>stopped listening.</em></h1>
+  <p class="hero-sub">A 30-day guided journal to help you reclaim self-trust, reconnect with your identity, and stop abandoning yourself.</p>
+
+  <div class="free-badge" id="hero-badge">
+    <span class="free-badge-dot"></span>
+    <span id="badge-text">Free for a limited time</span>
+  </div>
+
+  <br/>
+
+  <!-- Free mode CTA -->
+  <div id="free-cta">
+    <a class="cta-btn" id="free-dl-btn" href="https://gloctastic3.gumroad.com/l/thereturn" target="_blank">Download Free — PDF</a>
+    <p class="cta-note">No email required. Instant download.</p>
+  </div>
+
+  <!-- Paid mode: code gate + unlocked CTA -->
+  <div id="code-gate">
+    <label for="code-input">Have a redeem code?</label>
+    <div class="code-row">
+      <input id="code-input" type="text" placeholder="Enter your code" autocomplete="off" spellcheck="false" />
+      <button id="code-submit">Unlock</button>
+    </div>
+    <p id="code-msg"></p>
+  </div>
+
+  <div id="paid-cta">
+    <a class="cta-btn" href="https://gloctastic3.gumroad.com/l/thereturn" target="_blank">Download Free — PDF</a>
+    <p class="cta-note">Code accepted. Enjoy your free copy.</p>
+  </div>
+
+</section>
+
+<div class="section-divider"><span>What's inside</span></div>
+
+<section class="section">
+  <p class="section-label">The Journal</p>
+  <h2 class="section-heading">30 days. One honest<br><em>question at a time.</em></h2>
+  <p class="section-desc">Every prompt is designed to move you — not just reflect. You won't just know yourself better. You'll start acting like it.</p>
+
+  <div class="feature-grid">
+    <div class="feature-cell">
+      <div class="feature-num">01</div>
+      <div class="feature-title">Daily Prompts</div>
+      <div class="feature-text">One focused prompt per day — no fluff, no filler. Just the question you've been avoiding.</div>
+    </div>
+    <div class="feature-cell">
+      <div class="feature-num">02</div>
+      <div class="feature-title">The Return Principles</div>
+      <div class="feature-text">A grounding framework woven through every week. Something to come back to when the noise gets loud.</div>
+    </div>
+    <div class="feature-cell">
+      <div class="feature-num">03</div>
+      <div class="feature-title">Reflection Space</div>
+      <div class="feature-text">Room to write freely — no structure forced on your process. Print it or fill it in digitally.</div>
+    </div>
+    <div class="feature-cell">
+      <div class="feature-num">04</div>
+      <div class="feature-title">What Changed</div>
+      <div class="feature-text">A closing section to document the real shifts — proof that you showed up for yourself.</div>
+    </div>
+  </div>
+
+  <div class="quote-block">
+    <p>"The version of you that fell off track wasn't weak. They were just waiting for someone to come back for them. This journal is that return."</p>
+  </div>
+</section>
+
+<div class="section-divider"><span>Who this is for</span></div>
+
+<section class="section">
+  <p class="section-label">This is for you if</p>
+  <h2 class="section-heading">You know something's been<br><em>off for a while.</em></h2>
+  <p class="section-desc" style="margin-bottom: 2rem;">Not broken. Just disconnected. This journal was built for that exact feeling.</p>
+
+  <ul class="for-list">
+    <li>You feel like you've been going through the motions and can't remember when that started</li>
+    <li>You keep making choices that feel out of character, then wondering who you even are</li>
+    <li>You've tried productivity systems and they leave you emptier than before</li>
+    <li>You're not in crisis — you're just not fully yourself, and you feel it</li>
+    <li>You want to reconnect with your own voice before anyone else's</li>
+  </ul>
+</section>
+
+<div class="download-section">
+  <div class="download-inner">
+    <p class="section-label">Your copy is waiting</p>
+    <h2 class="section-heading" style="margin-bottom: 0.75rem;">Start the return<br><em>today.</em></h2>
+    <p style="color: var(--text-muted); font-size: 0.88rem; margin-bottom: 2rem; line-height: 1.75;" id="bottom-desc">Free for a limited time. Download instantly — no sign-up, no catch.</p>
+
+    <div class="free-badge" id="bottom-badge" style="margin-bottom: 2rem;">
+      <span class="free-badge-dot"></span>
+      <span id="bottom-badge-text">Normally $9 — Free right now</span>
+    </div>
+
+    <br/>
+
+    <!-- Free mode bottom CTA -->
+    <div id="free-cta-bottom">
+      <a class="cta-btn" href="https://gloctastic3.gumroad.com/l/thereturn" target="_blank">Get the Free PDF</a>
+      <p class="cta-note" style="margin-top: 1rem;">Available until further notice · PDF · 30 pages</p>
+    </div>
+
+    <!-- Paid mode bottom: code gate -->
+    <div id="code-gate-bottom" style="display:none; max-width: 340px; margin: 0 auto 0.5rem; text-align: left;">
+      <label for="code-input-bottom" style="font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-dim); display: block; margin-bottom: 0.5rem;">Have a redeem code?</label>
+      <div class="code-row">
+        <input id="code-input-bottom" type="text" placeholder="Enter your code" autocomplete="off" spellcheck="false" style="flex:1; background:var(--warm-dark); border:none; outline:none; color:var(--cream); font-family:'DM Sans',sans-serif; font-size:0.85rem; letter-spacing:0.12em; text-transform:uppercase; padding:0.75rem 1rem;" />
+        <button id="code-submit-bottom" style="background:rgba(201,168,76,0.15); border:none; border-left:0.5px solid rgba(201,168,76,0.25); color:var(--gold); font-family:'DM Sans',sans-serif; font-size:0.7rem; font-weight:500; letter-spacing:0.15em; text-transform:uppercase; padding:0 1.1rem; cursor:pointer;">Unlock</button>
+      </div>
+      <p id="code-msg-bottom" style="font-size:0.72rem; margin-top:0.5rem; min-height:1.1rem; letter-spacing:0.05em;"></p>
+    </div>
+
+    <div id="paid-cta-bottom" style="display:none; text-align:center;">
+      <a class="cta-btn" href="https://gloctastic3.gumroad.com/l/thereturn" target="_blank">Download Free — PDF</a>
+      <p class="cta-note" style="margin-top:1rem;">Code accepted. Enjoy your free copy.</p>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  © The Return · All rights reserved
+</footer>
+
+<script>
+(function() {
+  var MODE = SITE_MODE;
+  var CODE = REDEEM_CODE;
+
+  function applyMode() {
+    if (MODE === "free") {
+      // Everything is already set for free — nothing to change
+      return;
+    }
+
+    // PAID MODE — hide free CTAs, show code gates, update labels
+    document.getElementById("nav-tag").textContent = "$9 · Use Code to Unlock Free";
+    document.getElementById("badge-text").textContent = "Enter code AWAKEN to unlock free";
+    document.getElementById("bottom-badge-text").textContent = "$9 — Unlock free with a code";
+    document.getElementById("bottom-desc").textContent = "This journal is $9. If you have a referral code, enter it below to download free.";
+
+    // Hero
+    document.getElementById("free-cta").style.display = "none";
+    document.getElementById("code-gate").style.display = "block";
+
+    // Bottom
+    document.getElementById("free-cta-bottom").style.display = "none";
+    document.getElementById("code-gate-bottom").style.display = "block";
+  }
+
+  function setupCodeCheck(inputId, submitId, msgId, paidCtaId) {
+    var input = document.getElementById(inputId);
+    var btn = document.getElementById(submitId);
+    var msg = document.getElementById(msgId);
+    var paidCta = document.getElementById(paidCtaId);
+
+    function check() {
+      var val = input.value.trim().toUpperCase();
+      if (val === CODE) {
+        msg.textContent = "Code accepted — your free download is unlocked.";
+        msg.className = "success";
+        msg.style.color = "#7ec99a";
+        document.getElementById("code-gate").style.display = "none";
+        document.getElementById("code-gate-bottom").style.display = "none";
+        document.getElementById("paid-cta").style.display = "block";
+        document.getElementById("paid-cta-bottom").style.display = "block";
+        document.getElementById("badge-text").textContent = "Unlocked — Download Free";
+        document.getElementById("bottom-badge-text").textContent = "Unlocked — Download Free";
+      } else {
+        msg.textContent = "That code isn't right. Try again.";
+        msg.className = "error";
+        msg.style.color = "#e07060";
+        input.value = "";
+        input.focus();
+      }
+    }
+
+    btn.addEventListener("click", check);
+    input.addEventListener("keydown", function(e) {
+      if (e.key === "Enter") check();
+    });
+  }
+
+  applyMode();
+  setupCodeCheck("code-input", "code-submit", "code-msg", "paid-cta");
+  setupCodeCheck("code-input-bottom", "code-submit-bottom", "code-msg-bottom", "paid-cta-bottom");
+})();
+</script>
+
+</body>
+</html>
